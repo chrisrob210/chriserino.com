@@ -1,27 +1,34 @@
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import NavBar from '@/components/common/NavBar'
+
+import Navbar from '../components/Navbar'
+import LayoutFooter from '@/components/LayoutFooter'
+
 
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Chriserino.com',
-  description: 'Tutorials, solutions, and random apps',
+
+    title: 'Chriserino.com',
+    description: 'A Dev Playground',
+
 }
 
 export default function RootLayout({
-  children,
+    children,
 }: {
-  children: React.ReactNode
+    children: React.ReactNode
 }) {
-  return (
-    <html lang="en">
-      <body className={`w-3/4 mx-auto`}>
-        <NavBar />
-        {children}
-        <footer>testing stuff</footer>
-      </body>
-    </html>
-  )
+
+    return (
+        <html lang="en">
+            <body className={inter.className}>
+                <Navbar />
+                <div className="bg-slate-400">{children}</div>
+                <LayoutFooter />
+            </body>
+        </html>
+    )
+
 }
