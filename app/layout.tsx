@@ -23,9 +23,11 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={inter.className + " bg-slate-300  text-slate-900"}>
+            <body className={inter.className + "min-h-screen bg-zinc-800  text-slate-800"}>
                 <Navbar />
-                <div className="min-h-[500px] pt-5">{children}</div>
+                <div className="flex flex-col items-center min-h-[90vh] bg-slate-400 border pt-5">
+                    <div className='w-2/3'>{children}</div>
+                </div>
                 <LayoutFooter />
             </body>
         </html>
