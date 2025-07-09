@@ -34,10 +34,10 @@ export default function BarcodePage() {
     };
 
     return (
-        <main className="p-4 space-y-4">
+        <main className="p-4 space-y-4 text-center">
             <h1 className="text-2xl font-bold">eBay Barcode Lookup</h1>
             {!code && (
-                <>
+                <div className='flex flex-col items-center'>
                     <BarcodeScanner onScan={handleScan} />
                     <form onSubmit={handleManualSubmit} className="mt-4 space-y-2">
                         <label htmlFor="manualUPC" className="block font-semibold">Or enter UPC manually:</label>
@@ -51,11 +51,11 @@ export default function BarcodePage() {
                             value={manualInput}
                             onChange={(e) => setManualInput(e.target.value)}
                         />
-                        <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+                        <button type="submit" className="bg-gray-900 text-white px-4 py-2 border rounded">
                             Search
                         </button>
                     </form>
-                </>
+                </div>
             )}
             {loading && <p>Loading...</p>}
             {product && <ProductCard product={product} />}

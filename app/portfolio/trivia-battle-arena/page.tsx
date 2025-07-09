@@ -1,2 +1,1 @@
-// example placeholder
-// export { TriviaBattlePage as default } from '@/features/trivia-battle';
+export { TriviaBattlePage as default } from '@/features/tba';
