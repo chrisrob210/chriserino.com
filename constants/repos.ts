@@ -37,5 +37,6 @@ export const repos = [
         href: '/trivia-battle-arena',
         image: '/images/placeholder.png',
         github: 'https://github.com/chrisrob210/trivia-battle-arena'
+
     }
 ]
