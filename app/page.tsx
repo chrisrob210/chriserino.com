@@ -31,9 +31,9 @@ export default function PortfolioPage() {
                             <div className="text-lg font-bold text-center">{repo.title}</div>
                             <div className="flex flex-row justify-center text-center text-sm font-semibold">
                                 <ul className="flex flex-row gap-3 px-2 py-1 justify-center">
-                                    <li>Tech:</li>
+                                    <li key={`repo-tech-${repoIndex}`}>Tech:</li>
                                     {repo?.technologies?.map((tech: any, techIndex: number) => (
-                                        <li>
+                                        <li key={`repo-tech-${repoIndex}-${techIndex}`}>
                                             <Link key={`tech-link-${repoIndex}-${techIndex}`} href={tech.href} target='_blank' rel="noopener noreferrer" className="text-black bg-gray-100 px-2 py-1 rounded-md hover:text-indigo-500 hover:bg-white">{tech.title}</Link>
                                         </li>
                                     ))}
