@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ['latin'] })
 export const metadata: Metadata = {
 
     title: 'Chriserino.com',
-    description: 'A Dev Playground',
+    description: 'My Dev Playground',
 
 }
 
@@ -23,9 +23,13 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body className={inter.className + " min-h-screen flex flex-col bg-slate-400  text-slate-800"}>
                 <Navbar />
-                <div className="bg-slate-400">{children}</div>
+                <main className="flex flex-row justify-center flex-grow">
+                    <div className="w-full">
+                        {children}
+                    </div>
+                </main>
                 <LayoutFooter />
             </body>
         </html>
