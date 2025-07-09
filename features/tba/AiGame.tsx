@@ -67,15 +67,17 @@ export function AiGame() {
     let hasFetched = false;
 
     useEffect(() => {
-        getTriviaCategories().then(setCategories).catch(() => {});
+        getTriviaCategories().then(setCategories).catch(() => { });
     }, []);
 
     useEffect(() => {
-        if (hasFetched || !triviaCategory) return; //prevents double loading in dev mode
+        if (hasFetched) return; //prevents double loading in dev mode
         hasFetched = true;  //
-        getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory })
-            .then((qs) => setQuestions(qs))
-            .finally(() => setLoading(false));
+        if (triviaCategory) {
+            getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory })
+                .then((qs) => setQuestions(qs))
+                .finally(() => setLoading(false));
+        }
     }, [triviaCategory]);
 
     useEffect(() => {
@@ -111,13 +113,14 @@ export function AiGame() {
         setAiHP(100);
         setIndex(0);
         setWinner(null);
+        setTriviaCategory(null)
         setAnswerLocked(false);
-        getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory! })
-            .then((qs) => setQuestions(qs))
-            .finally(() => setLoading(false));
+        // getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory! })
+        //     .then((qs) => setQuestions(qs))
+        //     .finally(() => setLoading(false));
     }
 
-    if (loading) {
+    if (loading && triviaCategory) {
         return <div className="p-4">Loading questions...</div>;
     }
 
