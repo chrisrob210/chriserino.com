@@ -142,7 +142,7 @@ export function AiGame() {
     }
 
     if (loading && triviaCategory) {
-        return <div className="p-4">Loading questions...</div>;
+        return <div className="p-4 flex flex-col items-center">Loading questions...</div>;
     }
 
     if (!triviaCategory && categories.length > 0) {
