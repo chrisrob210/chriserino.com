@@ -4,15 +4,15 @@ export const repos = [
         technologies: [
             {
                 title: 'Next.js',
-                href: ''
+                href: 'https://nextjs.org/'
             },
             {
                 title: 'Ebay API',
-                href: ''
+                href: 'https://developer.ebay.com/api-docs/buy/feed/overview.html'
             },
             {
                 title: 'Zxing Barcode Scanner',
-                href: ''
+                href: 'https://github.com/zxing/zxing'
             }
         ],
         description: 'Use a camera to scan a barcode and search for it on Ebay.',
@@ -26,11 +26,11 @@ export const repos = [
         technologies: [
             {
                 title: 'Next.js',
-                href: ''
+                href: 'https://nextjs.org/'
             },
             {
                 title: 'Open Trivia Db API',
-                href: ''
+                href: 'https://opentdb.com/api_config.php'
             }
         ],
         description: 'Guess the correct answer and the AI loses HP, guess wrong and YOU lose HP. Defeat the AI and win.',
