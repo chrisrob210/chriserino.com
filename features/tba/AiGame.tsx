@@ -93,6 +93,18 @@ export function AiGame() {
         }, 500);
     }
 
+    function handlePlayAgain() {
+        setLoading(true);
+        setPlayerHP(100);
+        setAiHP(100);
+        setIndex(0);
+        setWinner(null);
+        setAnswerLocked(false);
+        getTriviaQuestions({ amount: 5, difficulty: 'easy' })
+            .then((qs) => setQuestions(qs))
+            .finally(() => setLoading(false));
+    }
+
     if (loading) {
         return <div className="p-4">Loading questions...</div>;
     }
@@ -103,6 +115,12 @@ export function AiGame() {
                 <HealthBar hp={playerHP} label="Player HP" />
                 <HealthBar hp={aiHP} label="AI HP" />
                 <h2 className="text-2xl font-bold">{winner} Wins!</h2>
+                <button
+                    className="px-4 py-2 rounded border bg-blue-600 text-white"
+                    onClick={handlePlayAgain}
+                >
+                    Play Again
+                </button>
             </div>
         );
     }
