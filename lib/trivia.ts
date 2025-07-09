@@ -8,9 +8,15 @@ export interface Question {
   answers: string[];
 }
 
+export interface TriviaCategory {
+  id: number;
+  name: string;
+}
+
 export type GetTriviaOptions = {
   amount: number;
   difficulty: string;
+  category?: number;
 };
 
 export function decodeHtml(html: string): string {
@@ -35,11 +41,22 @@ export function shuffleArray<T>(array: T[]): T[] {
   return arr;
 }
 
+export async function getTriviaCategories(): Promise<TriviaCategory[]> {
+  const res = await fetch('https://opentdb.com/api_category.php');
+  if (!res.ok) throw new Error('Failed to fetch trivia categories');
+  const data: { trivia_categories: TriviaCategory[] } = await res.json();
+  return data.trivia_categories;
+}
+
 export async function getTriviaQuestions({
   amount,
   difficulty,
+  category,
 }: GetTriviaOptions): Promise<Question[]> {
   const params = new URLSearchParams({ amount: String(amount), difficulty });
+  if (category) {
+    params.append('category', String(category));
+  }
   const res = await fetch(`https://opentdb.com/api.php?${params.toString()}`);
   if (!res.ok) throw new Error('Failed to fetch trivia questions');
   const data: {

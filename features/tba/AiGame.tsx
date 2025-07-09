@@ -1,7 +1,12 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { getTriviaQuestions, Question } from '@/lib/trivia';
+import {
+    getTriviaQuestions,
+    getTriviaCategories,
+    Question,
+    TriviaCategory,
+} from '@/lib/trivia';
 
 interface HealthBarProps {
     hp: number;
@@ -55,23 +60,30 @@ export function AiGame() {
     const [loading, setLoading] = useState(true);
     const [winner, setWinner] = useState<string | null>(null);
     const [answerLocked, setAnswerLocked] = useState(false);
+    const [triviaCategory, setTriviaCategory] = useState<number | null>(null);
+    const [categories, setCategories] = useState<TriviaCategory[]>([]);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
 
     let hasFetched = false;
 
     useEffect(() => {
-        if (hasFetched) return; //prevents double loading in dev mode
+        getTriviaCategories().then(setCategories).catch(() => {});
+    }, []);
+
+    useEffect(() => {
+        if (hasFetched || !triviaCategory) return; //prevents double loading in dev mode
         hasFetched = true;  //
-        getTriviaQuestions({ amount: 5, difficulty: 'easy' })
+        getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory })
             .then((qs) => setQuestions(qs))
             .finally(() => setLoading(false));
-    }, []);
+    }, [triviaCategory]);
 
     useEffect(() => {
         if (playerHP <= 0) setWinner('AI');
         else if (aiHP <= 0) setWinner('Player');
         else if (index >= questions.length && questions.length > 0) {
             setLoading(true);
-            getTriviaQuestions({ amount: 5, difficulty: 'easy' })
+            getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory! })
                 .then((qs) => setQuestions((prev) => [...prev, ...qs]))
                 .finally(() => setLoading(false));
         }
@@ -100,13 +112,38 @@ export function AiGame() {
         setIndex(0);
         setWinner(null);
         setAnswerLocked(false);
-        getTriviaQuestions({ amount: 5, difficulty: 'easy' })
+        getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory! })
             .then((qs) => setQuestions(qs))
             .finally(() => setLoading(false));
     }
 
     if (loading) {
         return <div className="p-4">Loading questions...</div>;
+    }
+
+    if (!triviaCategory) {
+        return (
+            <div className="p-4 flex flex-col items-center gap-4">
+                <select
+                    className="p-2 border rounded"
+                    value={selectedCategory ?? ''}
+                    onChange={(e) => setSelectedCategory(Number(e.target.value))}
+                >
+                    <option value="">Select Category</option>
+                    {categories.map((c) => (
+                        <option key={c.id} value={c.id}>
+                            {c.name}
+                        </option>
+                    ))}
+                </select>
+                <button
+                    className="px-4 py-2 rounded border bg-blue-600 text-white"
+                    onClick={() => selectedCategory && setTriviaCategory(selectedCategory)}
+                >
+                    Select
+                </button>
+            </div>
+        );
     }
 
     if (winner) {
