@@ -58,7 +58,7 @@ export async function getTriviaQuestions({
         params.append('category', String(category));
     }
     const res = await fetch(`https://opentdb.com/api.php?${params.toString()}`);
-    if (!res.ok && res.status != 429) throw new Error(JSON.stringify(res.status));
+    if (!res.ok) throw new Error(JSON.stringify(res.status));
     const data: {
         response_code: number;
         results: Array<{
@@ -71,7 +71,7 @@ export async function getTriviaQuestions({
         }>;
     } = await res.json();
 
-    if (data.response_code !== 0 && res.status != 429) {
+    if (data.response_code !== 0) {
         throw new Error(JSON.stringify(data));
     }
     return data.results?.map((q) => {
