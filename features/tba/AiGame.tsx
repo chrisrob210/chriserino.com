@@ -93,7 +93,7 @@ export function AiGame() {
     }, [playerHP, aiHP, index, questions.length]);
 
     useEffect(() => {
-        if (questions[index]) {
+        if (questions.length > 0) {
             setChangeCategoryDisabled(true);
             const timer = setTimeout(() => setChangeCategoryDisabled(false), 6000);
             return () => clearTimeout(timer);
@@ -193,7 +193,7 @@ export function AiGame() {
             <QuestionCard question={current} onAnswer={handleAnswer} disabled={answerLocked} />
             <div className="flex flex-row justify-center gap-4">
                 <button
-                    className="text-white bg-yellow-600 hover:bg-yellow-500 transition-colors duration-300 px-2 py-1 rounded-lg text-sm disabled:opacity-50"
+                    className={`${changeCategoryDisabled ? `text-slate-300 bg-stone-600` : `text-white bg-yellow-600`} ${!changeCategoryDisabled && `hover:bg-yellow-500 transition-colors duration-300`} px-2 py-1 rounded-lg text-sm disabled:opacity-50`}
                     onClick={handleChangeCategory}
                     disabled={changeCategoryDisabled}
                 >
