@@ -34,7 +34,7 @@ export default function PortfolioPage() {
                                     <li>Tech:</li>
                                     {repo?.technologies?.map((tech: any, techIndex: number) => (
                                         <li>
-                                            <Link key={`tech-link-${repoIndex}-${techIndex}`} href={tech.href} className="text-black bg-gray-100 px-2 py-1 rounded-md hover:text-indigo-500 hover:bg-white">{tech.title}</Link>
+                                            <Link key={`tech-link-${repoIndex}-${techIndex}`} href={tech.href} target='_blank' rel="noopener noreferrer" className="text-black bg-gray-100 px-2 py-1 rounded-md hover:text-indigo-500 hover:bg-white">{tech.title}</Link>
                                         </li>
                                     ))}
                                 </ul>
