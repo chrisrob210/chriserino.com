@@ -75,8 +75,8 @@ export function AiGame() {
         hasFetched = true;  //
         if (triviaCategory) {
             getTriviaQuestions({ amount: 5, difficulty: 'easy', category: triviaCategory })
-                .then((qs) => setQuestions(qs))
-                .finally(() => setLoading(false));
+                .then((qs) => { if (qs) setQuestions(qs) })
+                .finally(() => setLoading(false))
         }
     }, [triviaCategory]);
 
@@ -120,6 +120,11 @@ export function AiGame() {
         //     .finally(() => setLoading(false));
     }
 
+    function handleChangeCategory() {
+        setTriviaCategory(null)
+        setSelectedCategory(null)
+    }
+
     if (loading && triviaCategory) {
         return <div className="p-4">Loading questions...</div>;
     }
@@ -131,7 +136,7 @@ export function AiGame() {
                 <div className="flex gap-1">
                     <select
                         className="p-2 border rounded-lg"
-                        value={selectedCategory ?? ''}
+                        // value={selectedCategory ?? categories.length > 0 ? categories[0].id : ''}
                         onChange={(e) => setSelectedCategory(Number(e.target.value))}
                         defaultValue={categories[0].id}
                     >
@@ -144,7 +149,7 @@ export function AiGame() {
                     </select>
                     <button
                         className="px-4 py-2 rounded-lg bg-slate-600 text-white hover:bg-slate-500 transition-colors duration-500"
-                        onClick={() => selectedCategory && setTriviaCategory(selectedCategory)}
+                        onClick={() => selectedCategory ? setTriviaCategory(selectedCategory) : setTriviaCategory(9)}
                     >
                         Select
                     </button>
@@ -178,7 +183,7 @@ export function AiGame() {
             <HealthBar hp={aiHP} label="AI HP" />
             <QuestionCard question={current} onAnswer={handleAnswer} disabled={answerLocked} />
             <div className="flex flex-row justify-center gap-4">
-                <button className="text-white bg-yellow-600 hover:bg-yellow-500 transition-colors duration-300 px-2 py-1 rounded-lg text-sm" onClick={() => setTriviaCategory(null)}>Change Category</button>
+                <button className="text-white bg-yellow-600 hover:bg-yellow-500 transition-colors duration-300 px-2 py-1 rounded-lg text-sm" onClick={handleChangeCategory}>Change Category</button>
                 <button className="text-white bg-green-600 hover:bg-green-500 transition-colors duration-300 px-2 py-1 rounded-lg text-sm" onClick={() => handlePlayAgain()}>New Game</button>
             </div>
         </div>

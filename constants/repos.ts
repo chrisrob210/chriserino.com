@@ -16,7 +16,7 @@ export const repos = [
             }
         ],
         description: 'Use a camera to scan a barcode and search for it on Ebay.',
-        href: '/portfolio/ebay-barcode',
+        href: '/ebay-barcode',
         image: '/images/placeholder.png',
         github: 'https://github.com/chrisrob210/ebay-barcode-search'
     },
@@ -34,7 +34,7 @@ export const repos = [
             }
         ],
         description: 'Guess the correct answer and the AI loses HP, guess wrong and YOU lose HP. Defeat the AI and win.',
-        href: '/portfolio/trivia-battle-arena',
+        href: '/trivia-battle-arena',
         image: '/images/placeholder.png',
         github: 'https://github.com/chrisrob210/trivia-battle-arena'
     }
