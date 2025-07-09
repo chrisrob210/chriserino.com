@@ -63,6 +63,7 @@ export function AiGame() {
     const [triviaCategory, setTriviaCategory] = useState<number | null>(null);
     const [categories, setCategories] = useState<TriviaCategory[]>([]);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [changeCategoryDisabled, setChangeCategoryDisabled] = useState(false);
 
     let hasFetched = false;
 
@@ -90,6 +91,14 @@ export function AiGame() {
                 .finally(() => setLoading(false));
         }
     }, [playerHP, aiHP, index, questions.length]);
+
+    useEffect(() => {
+        if (questions.length > 0) {
+            setChangeCategoryDisabled(true);
+            const timer = setTimeout(() => setChangeCategoryDisabled(false), 6000);
+            return () => clearTimeout(timer);
+        }
+    }, [questions, index]);
 
     function handleAnswer(answer: string) {
         if (answerLocked || winner) return;
@@ -183,7 +192,13 @@ export function AiGame() {
             <HealthBar hp={aiHP} label="AI HP" />
             <QuestionCard question={current} onAnswer={handleAnswer} disabled={answerLocked} />
             <div className="flex flex-row justify-center gap-4">
-                <button className="text-white bg-yellow-600 hover:bg-yellow-500 transition-colors duration-300 px-2 py-1 rounded-lg text-sm" onClick={handleChangeCategory}>Change Category</button>
+                <button
+                    className={`${changeCategoryDisabled ? `text-slate-300 bg-stone-600` : `text-white bg-yellow-600`} ${!changeCategoryDisabled && `hover:bg-yellow-500 transition-colors duration-300`} px-2 py-1 rounded-lg text-sm disabled:opacity-50`}
+                    onClick={handleChangeCategory}
+                    disabled={changeCategoryDisabled}
+                >
+                    Change Category
+                </button>
                 <button className="text-white bg-green-600 hover:bg-green-500 transition-colors duration-300 px-2 py-1 rounded-lg text-sm" onClick={() => handlePlayAgain()}>New Game</button>
             </div>
         </div>
