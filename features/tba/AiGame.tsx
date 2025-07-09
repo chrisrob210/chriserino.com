@@ -70,8 +70,10 @@ export function AiGame() {
         if (playerHP <= 0) setWinner('AI');
         else if (aiHP <= 0) setWinner('Player');
         else if (index >= questions.length && questions.length > 0) {
-            if (playerHP === aiHP) setWinner('Draw');
-            else setWinner(playerHP > aiHP ? 'Player' : 'AI');
+            setLoading(true);
+            getTriviaQuestions({ amount: 5, difficulty: 'easy' })
+                .then((qs) => setQuestions((prev) => [...prev, ...qs]))
+                .finally(() => setLoading(false));
         }
     }, [playerHP, aiHP, index, questions.length]);
 
