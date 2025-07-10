@@ -9,7 +9,7 @@ export default function Navbar() {
     const pathname = usePathname(); // get current path
     return (
         <>
-            <ul className='flex flex-row justify-center gap-3 p-1 bg-slate-800'>
+            {/* <ul className='flex flex-row justify-center gap-3 p-1 bg-slate-800'>
                 {navlinks.map((navlink, index) => (
                     <li key={`nav-ul-li-${navlink.title.toLowerCase()}`} className={`whitespace-nowrap ${pathname === navlink.href ? `text-slate-400` : `text-white`}`}>
 
@@ -17,7 +17,7 @@ export default function Navbar() {
 
                     </li>
                 ))}
-            </ul>
+            </ul> */}
         </>
     )
 }

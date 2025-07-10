@@ -15,7 +15,7 @@ export const repos = [
                 href: 'https://github.com/zxing/zxing'
             }
         ],
-        description: 'Use a camera to scan a barcode and search for it on Ebay.',
+        description: 'Use a camera to scan a barcode and get Suggested and Average Pricing.',
         href: '/ebay-barcode',
         image: '/images/placeholder.png',
         github: 'https://github.com/chrisrob210/ebay-barcode-search'

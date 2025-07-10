@@ -23,7 +23,7 @@ export default function RootLayout({
 
     return (
         <html lang="en">
-            <body className={inter.className + " min-h-screen flex flex-col bg-slate-400  text-slate-800"}>
+            <body className={inter.className + " min-h-screen flex flex-col bg-gradient-to-b from-slate-200 via-slate-300 to-slate-400  text-slate-800"}>
                 <Navbar />
                 <main className="flex flex-row justify-center flex-grow">
                     <div className="w-full p-4">

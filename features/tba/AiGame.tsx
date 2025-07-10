@@ -149,7 +149,7 @@ export function AiGame() {
         return (
             <div className="p-4 flex flex-col items-center gap-4">
                 <div className="font-semibold">Select Trivia Category:</div>
-                <div className="flex gap-1">
+                <div className="flex flex-col sm:flex-row w-full gap-2">
                     <select
                         className="p-2 border rounded-lg"
                         // value={selectedCategory ?? categories.length > 0 ? categories[0].id : ''}
