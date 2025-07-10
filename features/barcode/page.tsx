@@ -1,14 +1,16 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BarcodeScanner } from './BarcodeScanner';
 import { ProductCard } from './ProductCard';
 
 export default function BarcodePage() {
     const [code, setCode] = useState<string | null>(null);
-    const [product, setProduct] = useState<any>(null);
+    const [products, setProducts] = useState<any>(null);
     const [loading, setLoading] = useState(false);
     const [manualInput, setManualInput] = useState('');
+
+    useEffect(() => { console.log(products) }, [products])
 
     const fetchProduct = async (upc: string) => {
         if (!/^[0-9]{12}$/.test(upc)) {
@@ -19,7 +21,7 @@ export default function BarcodePage() {
         setLoading(true);
         const res = await fetch(`/api/lookup?upc=${upc}`);
         const data = await res.json();
-        setProduct(data);
+        setProducts(data);
         setLoading(false);
     };
 
@@ -38,7 +40,9 @@ export default function BarcodePage() {
             <h1 className="text-2xl font-bold">eBay Barcode Lookup</h1>
             {!code && (
                 <div className='flex flex-col items-center'>
-                    <BarcodeScanner onScan={handleScan} />
+                    <div className="max-w-[512px] max-h-[512px] p-0 m-0">
+                        <BarcodeScanner onScan={handleScan} />
+                    </div>
                     <form onSubmit={handleManualSubmit} className="mt-4 space-y-2">
                         <label htmlFor="manualUPC" className="block font-semibold">Or enter UPC manually:</label>
                         <input
@@ -58,7 +62,18 @@ export default function BarcodePage() {
                 </div>
             )}
             {loading && <p>Loading...</p>}
-            {product && <ProductCard product={product} />}
+            {/* {products && products.map((product: any, productIndex: number) => (<ProductCard key={`ebay-product-${productIndex}`} product={product} />))} */}
+            {/* {products && products.map((product: any) => (<div>{product.title}</div>))} */}
+            {products && (
+                <div className="text-center text-gray-700 space-y-1">
+                    <p className="text-sm font-medium">
+                        Suggested Range: ${products.minPrice.toFixed(2)} – ${products.maxPrice.toFixed(2)}
+                    </p>
+                    <p className="text-xs text-gray-500">
+                        Average Price: ${products.averagePrice.toFixed(2)}
+                    </p>
+                </div>
+            )}
         </main>
     );
 }
