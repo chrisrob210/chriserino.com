@@ -3,7 +3,7 @@ import Image from "next/image";
 
 export default function ExperienceCard({ experience }: ExperienceCardProps) {
     return (
-        <div key={`experience-category-${experience.title}`} className='grid grid-cols-1 items-stretch p-3 border rounded-lg border-white'>
+        <div key={`experience-category-${experience.title}`} className='grid grid-cols-1 items-stretch p-3 border-[1px] rounded-lg border-white/20 bg-white/40 backdrop-blur-sm'>
             <div className="flex flex-col items-center text-left">
                 <div className="font-bold">{experience.title}</div>
                 <div className="flex flex-col gap-2">
