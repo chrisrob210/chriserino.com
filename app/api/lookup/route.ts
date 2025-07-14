@@ -22,7 +22,11 @@ export async function GET(req: NextRequest) {
 
         const ebayData = await ebayRes.json();
         // const item = ebayData.itemSummaries?.[0];
-        const items = ebayData.itemSummaries;
+        if (!ebayData.itemSummaries) {
+            console.error("Expected someData to be an array but got:", ebayData);
+            return NextResponse.json({ error: "Invalid response from eBay" }, { status: 500 });
+        }
+        const items = ebayData?.itemSummaries;
 
         // return NextResponse.json({
         //     title: item?.title || 'Not found',
@@ -32,10 +36,7 @@ export async function GET(req: NextRequest) {
         // });
         // return NextResponse.json(items);
 
-        if (!Array.isArray(items)) {
-            console.error("Expected someData to be an array but got:", typeof items);
-            return NextResponse.json({ error: "Invalid response from eBay" }, { status: 500 });
-        }
+
         const simplified = items
             .filter((item: any) => item.price?.value)
             .map((item: any) => ({
