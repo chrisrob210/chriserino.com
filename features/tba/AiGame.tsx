@@ -17,7 +17,7 @@ function HealthBar({ hp, label }: HealthBarProps) {
     return (
         <div className="mb-2 w-full">
             <div className="text-sm mb-1">{label}: {hp}</div>
-            <div className="h-4 w-full bg-gray-200 rounded overflow-hidden">
+            <div className="h-4 w-full bg-white rounded overflow-hidden">
                 <div
                     className="h-full bg-green-500 transition-all duration-500"
                     style={{ width: `${hp}%` }}
@@ -149,7 +149,7 @@ export function AiGame() {
         return (
             <div className="p-4 flex flex-col items-center gap-4">
                 <div className="font-semibold">Select Trivia Category:</div>
-                <div className="flex flex-col sm:flex-row w-full gap-2">
+                <div className="flex flex-col sm:flex-row sm:justify-center w-full gap-2">
                     <select
                         className="p-2 border rounded-lg"
                         // value={selectedCategory ?? categories.length > 0 ? categories[0].id : ''}
@@ -176,7 +176,8 @@ export function AiGame() {
 
     if (winner) {
         return (
-            <div className="p-4 flex flex-col items-center gap-4">
+            // <div className="p-4 sm:w-1/3 mx-auto flex flex-col items-center gap-4">
+            <div className='p-4 space-y-6 max-w-xl flex flex-col items-center mx-auto'>
                 <HealthBar hp={playerHP} label="Player HP" />
                 <HealthBar hp={aiHP} label="AI HP" />
                 <h2 className="text-2xl font-bold">{winner} Wins!</h2>

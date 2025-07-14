@@ -21,8 +21,8 @@ export const experience = [
         skills: [
             { name: 'React', icon: '/icons/react-original.svg' },
             { name: 'Node.js', icon: '/icons/nodejs-original.svg' },
-            { name: 'Next.js', icon: '' },
-            { name: 'Laravel', icon: '' }
+            { name: 'Next.js', icon: '/icons/next-js.png' },
+            { name: 'Laravel', icon: '/icons/laravel.png' }
         ]
     }
 ];

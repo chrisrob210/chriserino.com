@@ -64,13 +64,13 @@ export default function BarcodePage() {
             {loading && <p>Loading...</p>}
             {/* {products && products.map((product: any, productIndex: number) => (<ProductCard key={`ebay-product-${productIndex}`} product={product} />))} */}
             {/* {products && products.map((product: any) => (<div>{product.title}</div>))} */}
-            {products && (
+            {products && typeof products.minPrice === 'number' && typeof products.maxPrice === 'number' && (
                 <div className="text-center text-gray-700 space-y-1">
                     <p className="text-sm font-medium">
                         Suggested Range: ${products.minPrice.toFixed(2)} – ${products.maxPrice.toFixed(2)}
                     </p>
                     <p className="text-xs text-gray-500">
-                        Average Price: ${products.averagePrice.toFixed(2)}
+                        Average Price: ${products.averagePrice?.toFixed(2)}
                     </p>
                 </div>
             )}

@@ -17,12 +17,11 @@ export const repos = [
         ],
         description: 'Use a camera to scan a barcode and get Suggested and Average Pricing.',
         href: '/ebay-barcode',
-        image: '/images/placeholder.png',
+        image: '/images/repos/ebay-barcode-app.png',
         github: 'https://github.com/chrisrob210/ebay-barcode-search'
     },
     {
         title: 'Trivia Battle Arena',
-        technologiesf: 'Next.js // Open Trivia Db API',
         technologies: [
             {
                 title: 'Next.js',
@@ -35,7 +34,7 @@ export const repos = [
         ],
         description: 'Guess the correct answer and the AI loses HP, guess wrong and YOU lose HP. Defeat the AI and win.',
         href: '/trivia-battle-arena',
-        image: '/images/placeholder.png',
+        image: '/images/repos/trivia-battle.png',
         github: 'https://github.com/chrisrob210/trivia-battle-arena'
 
     }
