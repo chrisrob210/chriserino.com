@@ -26,7 +26,7 @@ export default function PortfolioPage() {
 
                 <div>
                     <div className="text-center">
-                        <p className="text-2xl font-bold mb-3">Hello! I'm Chris</p>
+                        <p className="text-2xl font-bold mb-3">Hello! I&apos;m Chris</p>
                     </div>
 
                     <div className="text-lg font-bold space-y-1 w-full max-w-xl mx-auto px-4">
