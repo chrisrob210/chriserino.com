@@ -32,6 +32,10 @@ export async function GET(req: NextRequest) {
         // });
         // return NextResponse.json(items);
 
+        if (!Array.isArray(items)) {
+            console.error("Expected someData to be an array but got:", typeof items);
+            return NextResponse.json({ error: "Invalid response from eBay" }, { status: 500 });
+        }
         const simplified = items
             .filter((item: any) => item.price?.value)
             .map((item: any) => ({
