@@ -70,6 +70,7 @@ export function BarcodeScanner({ onScan }: { onScan: (code: string) => void }) {
                         }
                     }
                 );
+                setError(null)
             } catch (err) {
                 console.error('Error starting camera:', err);
                 setError('Unable to start video stream.');
@@ -89,16 +90,20 @@ export function BarcodeScanner({ onScan }: { onScan: (code: string) => void }) {
 
     return (
         <div className="space-y-2 text-center">
-            <video
-                ref={videoRef}
-                className="w-full h-auto border rounded"
-                autoPlay
-                muted
-                playsInline
-            />
+            {/* <div className='relative w-full bg-black rounded-lg overflow-hidden'> */}
+            <div className='relative w-full bg-black rounded-lg overflow-hidden'>
+                <video
+                    ref={videoRef}
+                    className="w-full relative h-auto border rounded"
+                    autoPlay
+                    muted
+                    playsInline
+                />
+                <div className="absolute inset-1 pointer-events-none opacity-40 before:content-[''] before:absolute before:top-[25%] before:bottom-[25%] before:left-[10%] before:right-[10%] before:border-x-4 before:border-y-[1px] before:border-slate-200 before:rounded-lg before:shadow-[0_0_4px_rgba(0,0,0,0.5)]" />
+            </div>
             {devices.length > 0 && (
                 <select
-                    className="border p-1 rounded"
+                    className="relative border p-1 rounded"
                     value={selectedDeviceId ?? ''}
                     onChange={(e) => setSelectedDeviceId(e.target.value)}
                 >
