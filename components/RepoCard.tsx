@@ -4,7 +4,7 @@ import { RepoCardProps, RepoProps } from "@/lib/definitions"
 
 export default function RepoCard({ repo, repoIndex }: RepoCardProps) {
     return (
-        <div key={`repo-${repoIndex}`} className="flex flex-col justify-between gap-3 w-auto px-6 py-4 border-[1px] rounded-lg border-white/20 shadow-md shadow-gray-500/50 bg-white/40 backdrop-blur-sm hover:scale-[1.01] transition-transform duration-300 ease-in-out">
+        <div key={`repo-${repoIndex}`} className="flex flex-col justify-between gap-3 w-auto px-6 py-4 border-[1px] rounded-lg border-white/20 shadow-md shadow-gray-500/50 bg-white/40 backdrop-blur-sm">
             <div className="text-lg font-bold text-center">{repo.title}</div>
             <div className="text-sm font-semibold flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-center text-center">
                 {/* <span className="sm:mr-2">Tech:</span> */}
@@ -19,7 +19,7 @@ export default function RepoCard({ repo, repoIndex }: RepoCardProps) {
                     ))}
                 </ul>
             </div>
-            <div className='flex flex-row justify-center'><Image src={repo.image} alt="" width={256} height={128} className='rounded-lg' style={{ width: "768px", height: '128px' }} /></div>
+            <div className='flex flex-row justify-center'><Image src={repo.image} alt={repo.title} width={256} height={128} className='rounded-lg' style={{ width: "768px", height: '128px' }} /></div>
             <div className="">{repo.description}</div>
             <div className="grid grid-cols-2 gap-3">
                 <Link href={repo?.href} className='flex-1 rounded-md px-2 py-1 text-center whitespace-nowrap text-slate-100 bg-slate-500 hover:bg-slate-400'>View</Link>
