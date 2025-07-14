@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { BarcodeScanner } from './BarcodeScanner';
 import { ProductCard } from './ProductCard';
+import Link from 'next/link';
 
 export default function BarcodePage() {
     const [code, setCode] = useState<string | null>(null);
@@ -12,6 +13,12 @@ export default function BarcodePage() {
 
     useEffect(() => { console.log(products) }, [products])
 
+    const resetPage = () => {
+        setCode(null)
+        setProducts(null)
+        setLoading(false)
+        setManualInput('')
+    }
     const fetchProduct = async (upc: string) => {
         if (!/^[0-9]{12}$/.test(upc)) {
             alert('Invalid UPC-A format. Must be exactly 12 digits.');
@@ -64,7 +71,7 @@ export default function BarcodePage() {
             {loading && <p>Loading...</p>}
             {/* {products && products.map((product: any, productIndex: number) => (<ProductCard key={`ebay-product-${productIndex}`} product={product} />))} */}
             {/* {products && products.map((product: any) => (<div>{product.title}</div>))} */}
-            {products && typeof products.minPrice === 'number' && typeof products.maxPrice === 'number' && (
+            {/* {(products && typeof products.minPrice === 'number' && typeof products.maxPrice === 'number') && (
                 <div className="text-center text-gray-700 space-y-1">
                     <p className="text-sm font-medium">
                         Suggested Range: ${products.minPrice.toFixed(2)} – ${products.maxPrice.toFixed(2)}
@@ -72,8 +79,28 @@ export default function BarcodePage() {
                     <p className="text-xs text-gray-500">
                         Average Price: ${products.averagePrice?.toFixed(2)}
                     </p>
-                </div>
-            )}
+                </div>)} */}
+
+            {products ? (
+                (typeof products.minPrice === 'number' && typeof products.maxPrice === 'number') ? (
+                    <div className="text-center text-gray-700 space-y-1">
+                        <p className="text-sm font-medium">
+                            Suggested Range: ${products.minPrice.toFixed(2)} – ${products.maxPrice.toFixed(2)}
+                        </p>
+                        <p className="text-xs text-gray-500">
+                            Average Price: ${products.averagePrice?.toFixed(2)}
+                        </p>
+                    </div>
+                ) : (
+                    <div className="flex flex-col items-center gap-4 text-center text-gray-500 text-sm italic">
+                        <p>Could not find items.</p>
+                        <div className='bg-gray-900 text-white w-fit px-2 py-1 rounded-lg' onClick={resetPage}>Try a different Barcode.</div>
+                    </div>
+                )
+            ) : null}
+
+
+
         </main>
     );
 }
