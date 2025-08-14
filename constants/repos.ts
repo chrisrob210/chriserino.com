@@ -1,6 +1,37 @@
 export const repos = [
     {
+        title: 'Map By Schema Prototype',
+        category: 'Dev Tools',
+        technologies: [
+            {
+                title: 'PHP',
+                href: 'https://www.php.net/docs.php'
+            },
+            {
+                title: 'MySQL',
+                href: 'https://dev.mysql.com/doc/'
+            },
+            {
+                title: 'Artisan CLI',
+                href: 'https://laravel.com/docs/5.0/artisan'
+            },
+            {
+                title: 'Eloquent',
+                href: 'https://laravel.com/docs/5.0/eloquent'
+            },
+            {
+                title: 'Laravel 12',
+                href: 'https://laravel.com/docs/12.x'
+            }
+        ],
+        description: 'A Laravel-based CLI tool that auto-generates Eloquent models from your database schema — no manual coding required.',
+        href: '',
+        image: '/images/repos/mbn1.png',
+        github: 'https://github.com/chrisrob210/map-by-schema-prototype'
+    },
+    {
         title: 'Ebay Barcode Search',
+        category: 'E-Commerce Tool',
         technologies: [
             {
                 title: 'Next.js',
@@ -22,6 +53,7 @@ export const repos = [
     },
     {
         title: 'Trivia Battle Arena',
+        category: 'Game',
         technologies: [
             {
                 title: 'Next.js',

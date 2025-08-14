@@ -11,6 +11,7 @@ export type TechnologiesProps = {
 
 export type RepoProps = {
     title: string,
+    category: string,
     technologies: Array<TechnologiesProps>,
     description: string,
     href: string,
