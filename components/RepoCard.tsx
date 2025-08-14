@@ -40,7 +40,10 @@ export default function RepoCard({ repo, repoIndex }: RepoCardProps) {
         >
             {/* Title + Tech */}
             <div>
-                <div className="text-lg font-bold text-center">{repo.title}</div>
+                {/* Title + Category*/}
+                <div className="text-lg font-bold text-center whitespace-nowrap sm:mb-0 md:mb-1">{repo.title} - (<span className="text-base font-semibold italic">{repo.category}</span>)</div>
+
+                {/* Technologies */}
                 <div className="text-sm font-semibold flex flex-col gap-1 sm:flex-row sm:items-center sm:justify-center text-center">
                     <span className="text-center sm:text-left">Tech:</span>
                     <ul className="flex flex-wrap justify-center gap-2 sm:justify-start">
@@ -79,13 +82,13 @@ export default function RepoCard({ repo, repoIndex }: RepoCardProps) {
             {/* Description + Buttons */}
             <div className="flex flex-col justify-between h-full">
                 <div className="mb-2">{repo.description}</div>
-                <div className="grid grid-cols-2 gap-3 mt-auto">
-                    <Link
+                <div className={repo?.href != '' ? "grid grid-cols-2 gap-3 mt-auto" : "flex"}>
+                    {repo?.href != '' && <Link
                         href={repo?.href}
                         className="flex-1 rounded-md px-2 py-1 text-center whitespace-nowrap text-slate-100 bg-slate-500 hover:bg-slate-400"
                     >
                         View
-                    </Link>
+                    </Link>}
                     <Link
                         href={repo?.github}
                         className="flex-1 rounded-md px-2 py-1 text-center whitespace-nowrap text-slate-100 bg-slate-500 hover:bg-slate-400"
